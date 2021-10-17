@@ -48,10 +48,21 @@ const Embarcacion = ({
     <Fragment>
       <br />
       <div className="card">
-        <img className="card-img-top" src={url+nombreImagen+".jpg"} alt="Card cap"></img>
+        <img
+          className="card-img-top"
+          src={url + nombreImagen + ".jpg"}
+          alt="Card cap"
+        ></img>
         <div className="card-body">
           <h5 className="card-title">Modelo : {modelo}</h5>
-          <p className="card-text">{descripcion}</p>
+
+          {
+            embarcaciones ? 
+              <p className="card-text">{descripcion}</p>
+              :
+              null
+          }
+
           <p className="card-text">
             <strong>Precio </strong>${precio}
           </p>
