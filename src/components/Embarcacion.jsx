@@ -1,14 +1,18 @@
 import React, { Fragment } from "react";
 
+import imagenes from  "../images/208.jpg";
+
 const Embarcacion = ({
   embarcacion,
   embarcaciones,
   carroDeCompras,
   setCarro,
   setEmbarcacion,
+  cantidadItems,
+  setCantidadItems
 }) => {
-  const { id, marca, modelo, precio } = embarcacion;
-
+  const { id, marca, modelo, precio, nombreImagen, descripcion } = embarcacion;
+  const url = "../images/";
   function containsObject(obj, list) {
     var i;
     for (i = 0; i < list.length; i++) {
@@ -27,6 +31,7 @@ const Embarcacion = ({
 
     if (!containsObject(embarcacion, carroDeCompras)) {
       setCarro([...carroDeCompras, embarcacion]);
+      setCantidadItems(cantidadItems+1);
     }
   };
 
@@ -36,34 +41,40 @@ const Embarcacion = ({
     );
 
     setCarro(arrayActualizado);
+    setCantidadItems(cantidadItems - 1);
   };
 
   return (
     <Fragment>
       <br />
       <div className="card">
-        <h5 className="card-header"> Marca : {marca} </h5>
+        <img className="card-img-top" src={url+nombreImagen+".jpg"} alt="Card cap"></img>
         <div className="card-body">
-          <h5 class="card-title">Modelo : {modelo} </h5>
+          <h5 className="card-title">Modelo : {modelo}</h5>
+          <p className="card-text">{descripcion}</p>
+          <p className="card-text">
+            <strong>Precio </strong>${precio}
+          </p>
+          {embarcaciones ? (
+            <button
+              className="btn btn-outline-dark"
+              type="button"
+              onClick={() => registrarCompra(id)}
+            >
+              Comprar
+            </button>
+          ) : (
+            <button
+              className="btn btn-primary"
+              type="button"
+              onClick={() => deshacerCompra(id)}
+            >
+              Deshacer
+            </button>
+          )}
         </div>
-        {embarcaciones ? (
-          <button
-            className="btn btn-primary"
-            type="button"
-            onClick={() => registrarCompra(id)}
-          >
-            Comprar
-          </button>
-        ) : (
-          <button
-            classNameme="btn btn-primary"
-            type="button"
-            onClick={() => deshacerCompra(id)}
-          >
-            Deshacer
-          </button>
-        )}
       </div>
+
       <br />
     </Fragment>
   );

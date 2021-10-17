@@ -5,15 +5,15 @@ const CarroDeCompras = ({
   carroDeCompras,
   setCarro,
   setEmbarcacion,
+  mostrarCarro,
+  setMostrarCarro,
+  cantidadItems,
+  setCantidadItems
 }) => {
-
-
   return (
     <Fragment>
-      <div className="">
-        <h3> Lista de compras </h3>
-
-        {carroDeCompras.length === 0
+      <div className={mostrarCarro ? "carrito" : null}>
+        {carroDeCompras.length === 0 || !mostrarCarro
           ? null
           : carroDeCompras.map((embarcacion) => (
               <Embarcacion
@@ -22,6 +22,9 @@ const CarroDeCompras = ({
                 carroDeCompras={carroDeCompras}
                 setCarro={setCarro}
                 setEmbarcacion={setEmbarcacion}
+                setMostrarCarro={setMostrarCarro}
+                cantidadItems={cantidadItems}
+                setCantidadItems={setCantidadItems}
               />
             ))}
       </div>
